@@ -2,6 +2,8 @@
 
 本文供维护者发布真汇算的新版本。用户安装说明见 [README.md](README.md)。
 
+本项目当前仅通过 GitHub Releases 分发，不提交 Chrome Web Store 或 Microsoft Edge Add-ons。下方商店材料仅作为未来可选项保留。
+
 ## 1. 发布前检查
 
 1. 确认 `manifest.json` 与 `package.json` 中的版本号一致。
@@ -35,7 +37,7 @@ git push origin v2.0.0
 
 `.github/workflows/release.yml` 会重新运行测试，生成只包含扩展运行文件和必要说明的 ZIP，同时发布 SHA-256 校验文件。
 
-## 3. Chrome Web Store
+## 3. 可选：Chrome Web Store
 
 - 上传包：`release/真汇算-v2.0.0.zip`
 - 文案：`store-listing/chrome-zh-CN.md`
@@ -49,7 +51,7 @@ git push origin v2.0.0
 
 完成 Store Listing、Privacy、Distribution 和测试说明后，检查预览，再提交审核。
 
-## 4. Microsoft Edge Add-ons
+## 4. 可选：Microsoft Edge Add-ons
 
 - 上传与 Chrome 相同的扩展 ZIP
 - 文案：`store-listing/edge-zh-CN.md`

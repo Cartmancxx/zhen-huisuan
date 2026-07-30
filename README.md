@@ -4,6 +4,8 @@
 
 无需先选择“从哪种货币换到哪种货币”：直接在任意货币框中输入数字，其他货币会立即联动换算。币种和数量都可自由调整，同时显示 2–8 种货币。
 
+> 当前仅通过 GitHub 开源分发，不在 Chrome / Edge 扩展市场上架。请从 Releases 下载 ZIP，解压后使用浏览器“开发者模式”加载。
+
 ![真汇算主界面](design/zhenhuisuan-main-render.png)
 
 ## 特点
@@ -36,7 +38,13 @@
 
 ### 从发布包安装
 
-在 [Releases](https://github.com/Cartmancxx/zhen-huisuan/releases) 下载最新 ZIP，解压后按上面的步骤加载。
+1. 在 [Releases](https://github.com/Cartmancxx/zhen-huisuan/releases) 下载最新 ZIP。
+2. 将 ZIP 完整解压到一个固定文件夹。
+3. 打开 Chrome 的 `chrome://extensions`，或 Edge 的 `edge://extensions`。
+4. 打开“开发者模式”，点击“加载已解压的扩展程序”。
+5. 选择刚才解压出的文件夹。
+
+浏览器不会自动更新这种手动加载的扩展；有新版本时，请重新下载并覆盖文件，然后在扩展管理页点击“重新加载”。
 
 ## 使用
 
