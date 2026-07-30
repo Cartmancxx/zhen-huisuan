@@ -80,12 +80,7 @@ const THREE_DECIMAL_CURRENCIES = new Set([
   "TND"
 ]);
 
-let currencyDisplayNames;
-try {
-  currencyDisplayNames = new Intl.DisplayNames(["zh-CN"], { type: "currency" });
-} catch {
-  currencyDisplayNames = null;
-}
+const currencyDisplayNamesByLocale = new Map();
 
 // 首次安装且离线时使用。联网成功后会被包含全部可用币种的最新缓存替换。
 export const FALLBACK_SNAPSHOT = Object.freeze({
@@ -102,14 +97,23 @@ export const FALLBACK_SNAPSHOT = Object.freeze({
   source: "fallback"
 });
 
-export function getCurrencyName(currencyCode) {
+export function getCurrencyName(currencyCode, locale = "zh-CN") {
   const code = String(currencyCode || "").toUpperCase();
-  if (CURRENCY_NAME_OVERRIDES[code]) {
+  const normalizedLocale = String(locale || "zh-CN");
+  if (normalizedLocale.toLowerCase().startsWith("zh-cn") &&
+      CURRENCY_NAME_OVERRIDES[code]) {
     return CURRENCY_NAME_OVERRIDES[code];
   }
 
   try {
-    const localizedName = currencyDisplayNames?.of(code);
+    if (!currencyDisplayNamesByLocale.has(normalizedLocale)) {
+      currencyDisplayNamesByLocale.set(
+        normalizedLocale,
+        new Intl.DisplayNames([normalizedLocale], { type: "currency" })
+      );
+    }
+    const localizedName =
+      currencyDisplayNamesByLocale.get(normalizedLocale)?.of(code);
     return localizedName && localizedName !== code ? localizedName : code;
   } catch {
     return code;
@@ -130,7 +134,7 @@ export function getCurrencyFractionDigits(currencyCode) {
   return 2;
 }
 
-export function sortCurrencyCodes(currencyCodes) {
+export function sortCurrencyCodes(currencyCodes, locale = "zh-CN") {
   const uniqueCodes = [
     ...new Set(
       currencyCodes
@@ -150,7 +154,10 @@ export function sortCurrencyCodes(currencyCodes) {
         (rightRank ?? Number.MAX_SAFE_INTEGER);
     }
 
-    return getCurrencyName(left).localeCompare(getCurrencyName(right), "zh-CN");
+    return getCurrencyName(left, locale).localeCompare(
+      getCurrencyName(right, locale),
+      locale
+    );
   });
 }
 
@@ -281,7 +288,7 @@ export function parseAmount(rawValue, currencyCode = "") {
   return Number.isFinite(amount) ? amount : null;
 }
 
-export function formatAmount(value, currencyCode) {
+export function formatAmount(value, currencyCode, locale = "zh-CN") {
   if (!Number.isFinite(value)) {
     return "";
   }
@@ -295,7 +302,7 @@ export function formatAmount(value, currencyCode) {
     : baseFractionDigits;
   const safeValue = Math.abs(value) < 1e-12 ? 0 : value;
 
-  return new Intl.NumberFormat("zh-CN", {
+  return new Intl.NumberFormat(locale, {
     useGrouping: true,
     minimumFractionDigits: baseFractionDigits,
     maximumFractionDigits

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light">
-    <title>真汇算</title>
+    <title data-i18n="appName">真汇算</title>
     <link rel="stylesheet" href="popup.css">
   </head>
   <body>
@@ -12,12 +12,13 @@
       <section class="view converter-view" id="converter-view">
         <header class="topbar">
           <div class="title-group">
-            <h1>真汇算</h1>
+            <h1 data-i18n="appName">真汇算</h1>
             <span
               class="connection-dot is-loading"
               id="connection-dot"
               role="img"
               aria-label="正在读取汇率"
+              data-i18n-aria-label="loadingRatesAria"
             ></span>
           </div>
           <button
@@ -26,6 +27,8 @@
             type="button"
             aria-label="币种设置"
             title="币种设置"
+            data-i18n-aria-label="currencySettings"
+            data-i18n-title="currencySettings"
           >
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M12 15.25A3.25 3.25 0 1 0 12 8.75a3.25 3.25 0 0 0 0 6.5Z"></path>
@@ -34,50 +37,134 @@
           </button>
         </header>
 
-        <main class="currency-list" id="currency-list" aria-label="货币金额换算"></main>
+        <main
+          class="currency-list"
+          id="currency-list"
+          aria-label="货币金额换算"
+          data-i18n-aria-label="converterAria"
+        ></main>
 
         <footer class="footer">
           <div class="rate-meta">
-            <p class="status-text" id="status-text">正在读取汇率…</p>
+            <p class="status-text" id="status-text" data-i18n="loadingRates">正在读取汇率…</p>
             <a
               class="provider-link"
               href="https://www.exchangerate-api.com"
               target="_blank"
               rel="noreferrer"
+              data-i18n="providerCredit"
             >数据：ExchangeRate-API</a>
           </div>
-          <button class="refresh-button" id="refresh-button" type="button" aria-label="刷新汇率">
+          <button
+            class="refresh-button"
+            id="refresh-button"
+            type="button"
+            aria-label="刷新汇率"
+            data-i18n-aria-label="refreshRates"
+          >
             <svg class="refresh-icon" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M20 6v5h-5"></path>
               <path d="M4 18v-5h5"></path>
               <path d="M18.1 9A7 7 0 0 0 6.2 6.2L4 11"></path>
               <path d="M5.9 15A7 7 0 0 0 17.8 17.8L20 13"></path>
             </svg>
-            <span>刷新</span>
+            <span data-i18n="refresh">刷新</span>
           </button>
         </footer>
       </section>
 
       <section class="view settings-view" id="settings-view" hidden>
         <header class="settings-header">
-          <button class="icon-button back-button" id="back-button" type="button" aria-label="返回换算">
+          <button
+            class="icon-button back-button"
+            id="back-button"
+            type="button"
+            aria-label="返回换算"
+            data-i18n-aria-label="backToConverter"
+          >
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="m15 18-6-6 6-6"></path>
             </svg>
           </button>
-          <h2>币种设置</h2>
-          <button class="done-button" id="done-button" type="button">完成</button>
+          <h2 data-i18n="settingsTitle">币种设置</h2>
+          <button class="done-button" id="done-button" type="button" data-i18n="done">完成</button>
         </header>
 
         <main class="settings-content">
-          <div class="settings-list" id="settings-list" aria-label="已选择币种"></div>
+          <div
+            class="settings-list"
+            id="settings-list"
+            aria-label="已选择币种"
+            data-i18n-aria-label="selectedCurrenciesAria"
+          ></div>
           <button class="add-currency-button" id="add-currency-button" type="button">
             <span aria-hidden="true">＋</span>
-            <span>添加币种</span>
+            <span data-i18n="addCurrency">添加币种</span>
           </button>
-          <p class="settings-helper">同时显示 2–8 种货币 · 自动保存</p>
+          <p class="settings-helper" data-i18n="settingsHelper">
+            同时显示 2–8 种货币 · 自动保存
+          </p>
+
+          <button
+            class="sponsor-card"
+            id="sponsor-button"
+            type="button"
+            aria-label="查看赞助码"
+            data-i18n-aria-label="openSponsor"
+          >
+            <span class="sponsor-thumbnail" aria-hidden="true">
+              <img src="assets/sponsor-code.jpg" alt="">
+            </span>
+            <span class="sponsor-card-copy">
+              <strong data-i18n="sponsorTitle">赞助开源项目</strong>
+              <span data-i18n="sponsorDescription">完全自愿 · 不影响任何功能</span>
+            </span>
+            <svg class="sponsor-chevron" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m9 6 6 6-6 6"></path>
+            </svg>
+          </button>
         </main>
       </section>
+
+      <dialog
+        class="sponsor-dialog"
+        id="sponsor-dialog"
+        aria-labelledby="sponsor-dialog-title"
+        aria-describedby="sponsor-dialog-description"
+      >
+        <article class="sponsor-dialog-card">
+          <button
+            class="dialog-close-button"
+            id="sponsor-close-button"
+            type="button"
+            aria-label="关闭赞助码"
+            data-i18n-aria-label="closeSponsor"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m7 7 10 10M17 7 7 17"></path>
+            </svg>
+          </button>
+          <h2 id="sponsor-dialog-title" data-i18n="sponsorDialogTitle">
+            喜欢真汇算？
+          </h2>
+          <p
+            class="sponsor-dialog-description"
+            id="sponsor-dialog-description"
+            data-i18n="sponsorDialogDescription"
+          >
+            真汇算永久免费开源。觉得好用，可以请作者喝杯咖啡。
+          </p>
+          <img
+            class="sponsor-code-image"
+            src="assets/sponsor-code.jpg"
+            alt="程鑫的赞赏码"
+            data-i18n-alt="sponsorImageAlt"
+          >
+          <p class="sponsor-note" data-i18n="sponsorNote">
+            赞助完全自愿，不解锁功能，也不影响更新。
+          </p>
+        </article>
+      </dialog>
 
       <p class="sr-only" id="live-announcer" aria-live="polite"></p>
     </div>

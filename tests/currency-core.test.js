@@ -46,6 +46,8 @@ test("formats currencies with useful precision and thousands separators", () => 
   assert.equal(formatAmount(1234.5, "JPY"), "1,235");
   assert.equal(formatAmount(1.2345, "KWD"), "1.235");
   assert.equal(formatAmount(0.000456, "USD"), "0.000456");
+  assert.equal(formatAmount(1234.5, "USD", "en"), "1,234.50");
+  assert.equal(formatAmount(1234.5, "USD", "vi"), "1.234,50");
 });
 
 test("converts configurable target currencies through the USD base rate", () => {
@@ -89,6 +91,8 @@ test("normalizes dynamic currency selections and metadata", () => {
   );
   assert.equal(getCurrencyName("CNY"), "人民币");
   assert.equal(getCurrencyName("HKD"), "港币");
+  assert.notEqual(getCurrencyName("USD", "en"), getCurrencyName("USD", "zh-CN"));
+  assert.notEqual(getCurrencyName("VND", "vi"), "VND");
   assert.equal(getCurrencyFractionDigits("VND"), 0);
   assert.equal(getCurrencyFractionDigits("KWD"), 3);
 });

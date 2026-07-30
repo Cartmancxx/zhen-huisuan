@@ -1,8 +1,8 @@
 {
   "extensionName": {
-    "message": "真汇算"
+    "message": "Zhen Hui Suan"
   },
   "extensionDescription": {
-    "message": "Instant multi-currency conversion with configurable currencies, live-linked inputs, and smart thousands-separator parsing."
+    "message": "Minimal multi-currency conversion with configurable currencies, linked inputs, and smart thousands-separator parsing."
   }
 }

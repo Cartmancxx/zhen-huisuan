@@ -42,8 +42,9 @@ jobs:
         run: |
           mkdir -p dist
           zip -r "dist/zhen-huisuan-${RELEASE_TAG}.zip" \
-            manifest.json popup.html popup.css popup.js currency-core.js \
-            icons _locales README.md PRIVACY.md PUBLISHING.md LICENSE
+            manifest.json popup.html popup.css popup.js currency-core.js i18n.js \
+            icons assets _locales README.md README_EN.md \
+            PRIVACY.md PRIVACY_EN.md PUBLISHING.md LICENSE
           sha256sum "dist/zhen-huisuan-${RELEASE_TAG}.zip" \
             > "dist/zhen-huisuan-${RELEASE_TAG}.zip.sha256"
 

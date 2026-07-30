@@ -25,7 +25,9 @@ test("includes the required open-source and release documentation", async () => 
   for (const relativePath of [
     "LICENSE",
     "README.md",
+    "README_EN.md",
     "PRIVACY.md",
+    "PRIVACY_EN.md",
     "CONTRIBUTING.md",
     "PUBLISHING.md",
     "SECURITY.md",
@@ -42,6 +44,8 @@ test("includes the required open-source and release documentation", async () => 
   assert.match(license, /MIT License/);
   const readme = await readFile(join(projectDirectory, "README.md"), "utf8");
   assert.match(readme, /^# 真汇算/m);
+  assert.match(readme, /assets\/sponsor-code\.jpg/);
+  await assertNonEmpty("assets/sponsor-code.jpg");
 });
 
 test("store images use the required dimensions", async () => {
