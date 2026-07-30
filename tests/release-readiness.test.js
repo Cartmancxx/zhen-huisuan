@@ -27,6 +27,7 @@ test("includes the required open-source and release documentation", async () => 
     "README.md",
     "PRIVACY.md",
     "CONTRIBUTING.md",
+    "PUBLISHING.md",
     "SECURITY.md",
     "CODE_OF_CONDUCT.md",
     "CHANGELOG.md",

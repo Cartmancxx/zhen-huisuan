@@ -86,6 +86,8 @@ npm run serve
 
 欢迎提交 Issue 和 Pull Request。开始前请阅读 [CONTRIBUTING.md](CONTRIBUTING.md) 与 [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)。
 
+维护者发布新版本时请参照 [PUBLISHING.md](PUBLISHING.md)。
+
 ## 许可证
 
 [MIT License](LICENSE)

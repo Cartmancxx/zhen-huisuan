@@ -1,0 +1,57 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+      - run: npm test
+
+      - name: Verify tag and manifest versions
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          node --input-type=module -e '
+            import { readFile } from "node:fs/promises";
+            const manifest = JSON.parse(await readFile("manifest.json", "utf8"));
+            const packageJson = JSON.parse(await readFile("package.json", "utf8"));
+            const expected = process.env.RELEASE_TAG.replace(/^v/, "");
+            if (manifest.version !== expected || packageJson.version !== expected) {
+              throw new Error(`Tag ${process.env.RELEASE_TAG} does not match manifest/package version`);
+            }
+          '
+
+      - name: Build release archive
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          mkdir -p dist
+          zip -r "dist/zhen-huisuan-${RELEASE_TAG}.zip" \
+            manifest.json popup.html popup.css popup.js currency-core.js \
+            icons _locales README.md PRIVACY.md PUBLISHING.md LICENSE
+          sha256sum "dist/zhen-huisuan-${RELEASE_TAG}.zip" \
+            > "dist/zhen-huisuan-${RELEASE_TAG}.zip.sha256"
+
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" dist/* \
+            --verify-tag \
+            --title "真汇算 ${GITHUB_REF_NAME}" \
+            --generate-notes
