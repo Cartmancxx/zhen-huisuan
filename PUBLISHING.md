@@ -30,16 +30,16 @@
 将 `main` 推送到公开仓库后创建版本标签：
 
 ```powershell
-git tag -a v2.0.0 -m "真汇算 2.0.0"
+git tag -a v2.1.0 -m "真汇算 2.1.0"
 git push origin main
-git push origin v2.0.0
+git push origin v2.1.0
 ```
 
 `.github/workflows/release.yml` 会重新运行测试，生成只包含扩展运行文件和必要说明的 ZIP，同时发布 SHA-256 校验文件。
 
 ## 3. 可选：Chrome Web Store
 
-- 上传包：`release/真汇算-v2.0.0.zip`
+- 上传包：`release/真汇算-v2.1.0.zip`
 - 文案：`store-listing/chrome-zh-CN.md`
 - 图标：扩展包中的 `icons/icon-128.png`
 - 截图：

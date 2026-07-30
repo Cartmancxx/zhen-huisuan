@@ -8,12 +8,15 @@ import {
   formatAmount,
   getCurrencyFractionDigits,
   getCurrencyName,
-  hasUsableRates,
   isValidSnapshot,
   normalizeCurrencySelection,
   parseAmount,
   sortCurrencyCodes
 } from "./currency-core.js";
+import {
+  createTranslator,
+  detectUiLocale
+} from "./i18n.js";
 
 const API_URL = "https://open.er-api.com/v6/latest/USD";
 const RATES_CACHE_KEY = "fxRatesCacheV2";
@@ -22,6 +25,8 @@ const LAST_INPUT_KEY = "fxLastInputV1";
 const SELECTED_CURRENCIES_KEY = "fxSelectedCurrenciesV1";
 const REQUEST_TIMEOUT_MS = 8000;
 const MAX_CACHE_AGE_MS = 26 * 60 * 60 * 1000;
+const uiLocale = detectUiLocale();
+const t = createTranslator(uiLocale);
 
 const converterView = document.querySelector("#converter-view");
 const settingsView = document.querySelector("#settings-view");
@@ -34,6 +39,9 @@ const settingsButton = document.querySelector("#settings-button");
 const backButton = document.querySelector("#back-button");
 const doneButton = document.querySelector("#done-button");
 const addCurrencyButton = document.querySelector("#add-currency-button");
+const sponsorButton = document.querySelector("#sponsor-button");
+const sponsorDialog = document.querySelector("#sponsor-dialog");
+const sponsorCloseButton = document.querySelector("#sponsor-close-button");
 const liveAnnouncer = document.querySelector("#live-announcer");
 
 const inputs = new Map();
@@ -49,6 +57,39 @@ const state = {
 };
 
 let persistTimer = null;
+
+function applyStaticTranslations() {
+  document.documentElement.lang = uiLocale;
+
+  for (const element of document.querySelectorAll("[data-i18n]")) {
+    element.textContent = t(element.dataset.i18n);
+  }
+
+  const translatedAttributes = [
+    ["data-i18n-aria-label", "aria-label"],
+    ["data-i18n-title", "title"],
+    ["data-i18n-alt", "alt"]
+  ];
+
+  for (const [dataAttribute, targetAttribute] of translatedAttributes) {
+    for (const element of document.querySelectorAll(`[${dataAttribute}]`)) {
+      element.setAttribute(
+        targetAttribute,
+        t(element.getAttribute(dataAttribute))
+      );
+    }
+  }
+
+  document.title = t("appName");
+}
+
+function currencyName(code) {
+  return getCurrencyName(code, uiLocale);
+}
+
+function formatCurrencyAmount(value, code) {
+  return formatAmount(value, code, uiLocale);
+}
 
 function storageGet(keys) {
   if (globalThis.chrome?.storage?.local) {
@@ -94,7 +135,7 @@ function getAvailableCurrencyCodes() {
   return sortCurrencyCodes([
     ...state.selectedCodes,
     ...Object.keys(state.snapshot.rates ?? {})
-  ]);
+  ], uiLocale);
 }
 
 function createCurrencyRow(code) {
@@ -107,8 +148,8 @@ function createCurrencyRow(code) {
 
   const name = document.createElement("span");
   name.className = "currency-name";
-  name.textContent = getCurrencyName(code);
-  name.title = getCurrencyName(code);
+  name.textContent = currencyName(code);
+  name.title = currencyName(code);
 
   const currencyCode = document.createElement("span");
   currencyCode.className = "currency-code";
@@ -121,7 +162,10 @@ function createCurrencyRow(code) {
   input.inputMode = "decimal";
   input.autocomplete = "off";
   input.spellcheck = false;
-  input.setAttribute("aria-label", `${getCurrencyName(code)}金额`);
+  input.setAttribute(
+    "aria-label",
+    t("amountLabel", { currency: currencyName(code) })
+  );
   input.placeholder = getCurrencyFractionDigits(code) === 0 ? "0" : "0.00";
 
   meta.append(name, currencyCode);
@@ -173,7 +217,7 @@ function renderConversions({ preserveSource = true } = {}) {
     }
     input.value = converted?.[code] === undefined
       ? ""
-      : formatAmount(converted[code], code);
+      : formatCurrencyAmount(converted[code], code);
   }
 }
 
@@ -199,7 +243,7 @@ function renderConverterRows({ focusSource = false } = {}) {
 function formatUpdateTime(unixSeconds) {
   const date = new Date(Number(unixSeconds) * 1000);
   if (Number.isNaN(date.getTime())) {
-    return "更新时间未知";
+    return t("updateUnknown");
   }
 
   const now = new Date();
@@ -208,21 +252,21 @@ function formatUpdateTime(unixSeconds) {
     date.getMonth() === now.getMonth() &&
     date.getDate() === now.getDate();
 
-  const time = new Intl.DateTimeFormat("zh-CN", {
+  const time = new Intl.DateTimeFormat(uiLocale, {
     hour: "2-digit",
     minute: "2-digit",
     hour12: false
   }).format(date);
 
   if (isToday) {
-    return `今日汇率 · ${time}`;
+    return t("todayRate", { time });
   }
 
-  const day = new Intl.DateTimeFormat("zh-CN", {
+  const day = new Intl.DateTimeFormat(uiLocale, {
     month: "numeric",
     day: "numeric"
   }).format(date);
-  return `${day}汇率 · ${time}`;
+  return t("datedRate", { date: day, time });
 }
 
 function setConnectionState(kind, message, announcement = "") {
@@ -244,7 +288,7 @@ function showCurrentSnapshotStatus(kind = "live") {
   setConnectionState(
     kind,
     formatUpdateTime(state.snapshot.timeLastUpdateUnix),
-    "汇率已更新"
+    t("ratesUpdated")
   );
 }
 
@@ -282,7 +326,7 @@ function handleInput(event) {
     rows.get(code)?.classList.add("is-invalid");
     input.setAttribute("aria-invalid", "true");
     clearDerivedInputs(code);
-    announce("请输入有效数字");
+    announce(t("invalidNumber"));
     queueLastInputSave();
     return;
   }
@@ -298,7 +342,7 @@ function handleBlur(event) {
   const amount = parseAmount(input.value, code);
 
   if (amount !== null) {
-    input.value = formatAmount(amount, code);
+    input.value = formatCurrencyAmount(amount, code);
     if (state.sourceCode === code) {
       state.sourceRaw = input.value;
       queueLastInputSave();
@@ -371,7 +415,7 @@ async function refreshRates({ force = false } = {}) {
   }
 
   state.isLoading = true;
-  setConnectionState("loading", "正在更新汇率…");
+  setConnectionState("loading", t("updatingRates"));
 
   const controller = new AbortController();
   const timeout = window.setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
@@ -383,7 +427,7 @@ async function refreshRates({ force = false } = {}) {
     });
 
     if (!response.ok) {
-      throw new Error(`汇率请求失败：${response.status}`);
+      throw new Error(t("fetchError", { status: response.status }));
     }
 
     const payload = await response.json();
@@ -396,13 +440,15 @@ async function refreshRates({ force = false } = {}) {
   } catch (error) {
     const hasCachedApiRates = state.snapshot.source === "api";
     const message = hasCachedApiRates
-      ? `网络异常 · ${formatUpdateTime(state.snapshot.timeLastUpdateUnix)}`
-      : "网络异常 · 使用离线参考汇率";
+      ? t("networkCached", {
+          timeStatus: formatUpdateTime(state.snapshot.timeLastUpdateUnix)
+        })
+      : t("networkFallback");
 
     setConnectionState(
       hasCachedApiRates ? "cached" : "fallback",
       message,
-      "汇率更新失败，已继续使用本地汇率"
+      t("updateFailedUsingCache")
     );
     console.warn(error);
   } finally {
@@ -424,12 +470,15 @@ function createSettingRow(code, index, availableCodes, selectedSet) {
   const select = document.createElement("select");
   select.className = "currency-select";
   select.dataset.index = String(index);
-  select.setAttribute("aria-label", `第 ${index + 1} 个币种`);
+  select.setAttribute(
+    "aria-label",
+    t("currencyPosition", { position: index + 1 })
+  );
 
   for (const optionCode of availableCodes) {
     const option = document.createElement("option");
     option.value = optionCode;
-    option.textContent = `${getCurrencyName(optionCode)} · ${optionCode}`;
+    option.textContent = `${currencyName(optionCode)} · ${optionCode}`;
     option.selected = optionCode === code;
     option.disabled = optionCode !== code && selectedSet.has(optionCode);
     select.append(option);
@@ -448,11 +497,11 @@ function createSettingRow(code, index, availableCodes, selectedSet) {
     state.selectedCodes.length <= MIN_VISIBLE_CURRENCIES;
   removeButton.setAttribute(
     "aria-label",
-    `移除${getCurrencyName(code)}`
+    t("removeCurrency", { currency: currencyName(code) })
   );
   removeButton.title = state.selectedCodes.length <= MIN_VISIBLE_CURRENCIES
-    ? `至少保留 ${MIN_VISIBLE_CURRENCIES} 种货币`
-    : `移除${getCurrencyName(code)}`;
+    ? t("minimumCurrencies", { count: MIN_VISIBLE_CURRENCIES })
+    : t("removeCurrency", { currency: currencyName(code) });
   removeButton.innerHTML = `
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="m7 7 10 10M17 7 7 17"></path>
@@ -479,10 +528,10 @@ function renderSettings({ focusIndex = null } = {}) {
     state.selectedCodes.length >= MAX_VISIBLE_CURRENCIES;
   addCurrencyButton.disabled = reachedMaximum || unusedCodes.length === 0;
   addCurrencyButton.title = reachedMaximum
-    ? `最多同时显示 ${MAX_VISIBLE_CURRENCIES} 种货币`
+    ? t("maximumCurrencies", { count: MAX_VISIBLE_CURRENCIES })
     : unusedCodes.length === 0
-      ? "联网获取汇率后可添加更多币种"
-      : "添加币种";
+      ? t("addAfterOnline")
+      : t("addCurrency");
 
   if (focusIndex !== null) {
     requestAnimationFrame(() => {
@@ -522,7 +571,7 @@ function applySelectedCodes(nextCodes, preferredSourceIndex = 0) {
     state.sourceCode = nextSourceCode;
     state.sourceAmount = Number.isFinite(nextAmount) ? nextAmount : null;
     state.sourceRaw = Number.isFinite(nextAmount)
-      ? formatAmount(nextAmount, nextSourceCode)
+      ? formatCurrencyAmount(nextAmount, nextSourceCode)
       : "";
   }
 
@@ -550,7 +599,7 @@ function handleCurrencyReplacement(event) {
   nextCodes[index] = nextCode;
   applySelectedCodes(nextCodes, index);
   renderSettings({ focusIndex: index });
-  announce(`已替换为${getCurrencyName(nextCode)}`);
+  announce(t("replacedCurrency", { currency: currencyName(nextCode) }));
 }
 
 function handleCurrencyRemoval(event) {
@@ -569,7 +618,7 @@ function handleCurrencyRemoval(event) {
   );
   applySelectedCodes(nextCodes, Math.min(index, nextCodes.length - 1));
   renderSettings({ focusIndex: Math.min(index, nextCodes.length - 1) });
-  announce(`已移除${getCurrencyName(removedCode)}`);
+  announce(t("removedCurrency", { currency: currencyName(removedCode) }));
 }
 
 function handleCurrencyAddition() {
@@ -582,28 +631,43 @@ function handleCurrencyAddition() {
     (code) => !selectedSet.has(code)
   );
   if (!nextCode) {
-    announce("联网获取汇率后可添加更多币种");
+    announce(t("addAfterOnline"));
     return;
   }
 
   const nextCodes = [...state.selectedCodes, nextCode];
   applySelectedCodes(nextCodes);
   renderSettings({ focusIndex: nextCodes.length - 1 });
-  announce(`已添加${getCurrencyName(nextCode)}`);
+  announce(t("addedCurrency", { currency: currencyName(nextCode) }));
 }
 
 function openSettings() {
   converterView.hidden = true;
   settingsView.hidden = false;
-  document.title = "币种设置 · 真汇算";
+  document.title = t("settingsDocumentTitle");
   renderSettings({ focusIndex: 0 });
 }
 
 function closeSettings() {
+  if (sponsorDialog.open) {
+    sponsorDialog.close();
+  }
   settingsView.hidden = true;
   converterView.hidden = false;
-  document.title = "真汇算";
+  document.title = t("appName");
   renderConverterRows({ focusSource: true });
+}
+
+function openSponsorDialog() {
+  if (!sponsorDialog.open) {
+    sponsorDialog.showModal();
+  }
+}
+
+function closeSponsorDialog() {
+  if (sponsorDialog.open) {
+    sponsorDialog.close();
+  }
 }
 
 function restoreLastInput(savedInput) {
@@ -613,9 +677,7 @@ function restoreLastInput(savedInput) {
     : state.selectedCodes[0];
   const raw = typeof savedInput?.raw === "string"
     ? savedInput.raw
-    : code === "CNY"
-      ? "1,000.00"
-      : formatAmount(1000, code);
+    : formatCurrencyAmount(1000, code);
 
   state.sourceCode = code;
   state.sourceRaw = raw;
@@ -623,6 +685,7 @@ function restoreLastInput(savedInput) {
 }
 
 async function initialize() {
+  applyStaticTranslations();
   refreshButton.addEventListener("click", () => {
     void refreshRates({ force: true });
   });
@@ -630,7 +693,17 @@ async function initialize() {
   backButton.addEventListener("click", closeSettings);
   doneButton.addEventListener("click", closeSettings);
   addCurrencyButton.addEventListener("click", handleCurrencyAddition);
+  sponsorButton.addEventListener("click", openSponsorDialog);
+  sponsorCloseButton.addEventListener("click", closeSponsorDialog);
+  sponsorDialog.addEventListener("click", (event) => {
+    if (event.target === sponsorDialog) {
+      closeSponsorDialog();
+    }
+  });
   document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && sponsorDialog.open) {
+      return;
+    }
     if (event.key === "Escape" && !settingsView.hidden) {
       event.preventDefault();
       closeSettings();
@@ -663,7 +736,7 @@ async function initialize() {
     );
   } else {
     state.snapshot = FALLBACK_SNAPSHOT;
-    setConnectionState("fallback", "连接中 · 暂用离线参考汇率");
+    setConnectionState("fallback", t("connectingFallback"));
   }
 
   restoreLastInput(stored[LAST_INPUT_KEY]);
