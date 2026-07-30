@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="真汇算：极简、开源的多币种联动汇率换算浏览器扩展。">
+  <title>真汇算｜多币种，即输即算</title>
+  <style>
+    :root { color-scheme: light; font-family: Inter, "PingFang SC", "Microsoft YaHei", sans-serif; color: #111827; background: #f5f8ff; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    main { width: min(1040px, calc(100% - 40px)); margin: 0 auto; padding: 80px 0; }
+    .hero { display: grid; grid-template-columns: 1.2fr .8fr; gap: 72px; align-items: center; }
+    .eyebrow { color: #175cd3; font-weight: 750; letter-spacing: .08em; }
+    h1 { margin: 14px 0 18px; font-size: clamp(52px, 8vw, 84px); line-height: .95; letter-spacing: -.06em; }
+    p { font-size: 19px; line-height: 1.75; color: #475467; }
+    .actions { display: flex; gap: 12px; margin-top: 30px; flex-wrap: wrap; }
+    a { color: inherit; }
+    .button { padding: 13px 20px; border-radius: 12px; text-decoration: none; font-weight: 700; border: 1px solid #d0d5dd; background: white; }
+    .button.primary { background: #175cd3; color: white; border-color: #175cd3; }
+    .shot { width: 100%; max-width: 390px; justify-self: center; border-radius: 22px; box-shadow: 0 28px 70px rgba(23, 92, 211, .18); }
+    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 80px; }
+    .card { padding: 24px; background: white; border: 1px solid #e4e7ec; border-radius: 18px; }
+    .card h2 { margin: 0 0 8px; font-size: 18px; }
+    .card p { margin: 0; font-size: 15px; }
+    footer { margin-top: 72px; padding-top: 24px; border-top: 1px solid #d0d5dd; color: #667085; }
+    @media (max-width: 760px) { main { padding: 44px 0; } .hero { grid-template-columns: 1fr; gap: 40px; } .features { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <div>
+        <div class="eyebrow">开源浏览器扩展</div>
+        <h1>真汇算</h1>
+        <p>多币种，即输即算。无需选择换算方向，任意一行输入，其他货币立即联动；支持 2–8 种自选货币和常见千分符。</p>
+        <div class="actions">
+          <a class="button primary" href="https://github.com/Cartmancxx/zhen-huisuan">查看源码</a>
+          <a class="button" href="privacy.html">隐私政策</a>
+        </div>
+      </div>
+      <img class="shot" src="../design/zhenhuisuan-main-render.png" alt="真汇算扩展主界面">
+    </section>
+    <section class="features">
+      <article class="card"><h2>任意输入</h2><p>不需要指定源币种；在哪一行输入，就从哪一种货币开始计算。</p></article>
+      <article class="card"><h2>自由组合</h2><p>同时显示 2–8 种货币，随时增加、删除或替换。</p></article>
+      <article class="card"><h2>克制权限</h2><p>不读取网页、不含广告，设置与输入只保存在浏览器本地。</p></article>
+    </section>
+    <footer>汇率为最新每日市场参考值，并非逐秒交易报价。项目采用 MIT License。</footer>
+  </main>
+</body>
+</html>

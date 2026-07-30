@@ -1,0 +1,8 @@
+{
+  "extensionName": {
+    "message": "真汇算"
+  },
+  "extensionDescription": {
+    "message": "Instant multi-currency conversion with configurable currencies, live-linked inputs, and smart thousands-separator parsing."
+  }
+}

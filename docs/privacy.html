@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>真汇算隐私政策</title>
+  <style>
+    body { max-width: 760px; margin: 0 auto; padding: 48px 24px 80px; color: #182230; font: 16px/1.8 Inter, "PingFang SC", "Microsoft YaHei", sans-serif; }
+    h1 { font-size: 38px; letter-spacing: -.04em; margin-bottom: 4px; }
+    h2 { margin-top: 34px; }
+    .date { color: #667085; }
+    code { background: #f2f4f7; padding: 2px 6px; border-radius: 5px; word-break: break-all; }
+    a { color: #175cd3; }
+  </style>
+</head>
+<body>
+  <h1>真汇算隐私政策</h1>
+  <p class="date">最后更新：2026 年 7 月 30 日</p>
+  <p>真汇算尊重并保护用户隐私。扩展开发者不会通过本扩展收集、出售、共享或用于广告目的处理任何个人数据。</p>
+
+  <h2>本地保存的数据</h2>
+  <p>扩展使用浏览器提供的扩展本地存储，保存用户选择的币种及顺序、最近一次输入的金额与输入币种，以及最近一次成功获取的汇率和更新时间。这些数据只保存在用户的浏览器中，开发者无法访问。</p>
+
+  <h2>网络请求</h2>
+  <p>扩展仅向 <code>https://open.er-api.com/v6/latest/USD</code> 请求公开汇率 JSON。请求不会包含用户输入的金额、所选币种、网页内容、浏览历史或账户信息。服务提供商可能按其自身政策处理常规连接信息；详见 <a href="https://www.exchangerate-api.com/privacy">ExchangeRate-API 隐私政策</a>。</p>
+
+  <h2>不访问的数据</h2>
+  <p>真汇算不会读取或修改当前网页，也不会访问浏览历史、书签、Cookie、剪贴板、定位、联系人、文件、摄像头、麦克风或账户信息。</p>
+
+  <h2>权限用途</h2>
+  <ul>
+    <li><code>storage</code>：保存本地设置、输入和汇率缓存。</li>
+    <li><code>https://open.er-api.com/*</code>：获取公开汇率数据。</li>
+  </ul>
+
+  <h2>政策变更与联系</h2>
+  <p>如本政策发生实质变化，更新版本会随扩展版本和源代码一同发布。问题或建议请通过 <a href="https://github.com/Cartmancxx/zhen-huisuan/issues">GitHub Issues</a> 提交。</p>
+</body>
+</html>

@@ -1,0 +1,19 @@
+name: 功能建议
+description: 提议与快速汇率换算有关的改进
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: 使用场景
+      description: 现在遇到了什么问题？
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 建议方案
+      description: 你希望真汇算怎样处理？
+    validations:
+      required: true

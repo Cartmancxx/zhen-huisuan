@@ -1,0 +1,36 @@
+name: Bug 报告
+description: 报告可以稳定复现的问题
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: 问题描述
+      description: 请说明预期结果和实际结果。
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 复现步骤
+      placeholder: |
+        1. 打开……
+        2. 输入……
+        3. 看到……
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: 浏览器与版本
+      placeholder: Chrome 140 / Edge 140
+    validations:
+      required: true
+  - type: input
+    id: extension
+    attributes:
+      label: 真汇算版本
+      placeholder: 2.0.0
+    validations:
+      required: true

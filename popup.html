@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>真汇算</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <div class="app">
+      <section class="view converter-view" id="converter-view">
+        <header class="topbar">
+          <div class="title-group">
+            <h1>真汇算</h1>
+            <span
+              class="connection-dot is-loading"
+              id="connection-dot"
+              role="img"
+              aria-label="正在读取汇率"
+            ></span>
+          </div>
+          <button
+            class="icon-button settings-button"
+            id="settings-button"
+            type="button"
+            aria-label="币种设置"
+            title="币种设置"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 15.25A3.25 3.25 0 1 0 12 8.75a3.25 3.25 0 0 0 0 6.5Z"></path>
+              <path d="M19.2 13.1c.05-.36.08-.73.08-1.1s-.03-.74-.08-1.1l2.02-1.58-2-3.46-2.51 1.01a8.28 8.28 0 0 0-1.9-1.1L14.43 3h-4.01l-.39 2.77a8.28 8.28 0 0 0-1.9 1.1L5.62 5.86l-2 3.46 2.02 1.58c-.05.36-.08.73-.08 1.1s.03.74.08 1.1l-2.02 1.58 2 3.46 2.51-1.01c.58.45 1.22.82 1.9 1.1l.39 2.77h4.01l.39-2.77a8.28 8.28 0 0 0 1.9-1.1l2.51 1.01 2-3.46-2.03-1.58Z"></path>
+            </svg>
+          </button>
+        </header>
+
+        <main class="currency-list" id="currency-list" aria-label="货币金额换算"></main>
+
+        <footer class="footer">
+          <div class="rate-meta">
+            <p class="status-text" id="status-text">正在读取汇率…</p>
+            <a
+              class="provider-link"
+              href="https://www.exchangerate-api.com"
+              target="_blank"
+              rel="noreferrer"
+            >数据：ExchangeRate-API</a>
+          </div>
+          <button class="refresh-button" id="refresh-button" type="button" aria-label="刷新汇率">
+            <svg class="refresh-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20 6v5h-5"></path>
+              <path d="M4 18v-5h5"></path>
+              <path d="M18.1 9A7 7 0 0 0 6.2 6.2L4 11"></path>
+              <path d="M5.9 15A7 7 0 0 0 17.8 17.8L20 13"></path>
+            </svg>
+            <span>刷新</span>
+          </button>
+        </footer>
+      </section>
+
+      <section class="view settings-view" id="settings-view" hidden>
+        <header class="settings-header">
+          <button class="icon-button back-button" id="back-button" type="button" aria-label="返回换算">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m15 18-6-6 6-6"></path>
+            </svg>
+          </button>
+          <h2>币种设置</h2>
+          <button class="done-button" id="done-button" type="button">完成</button>
+        </header>
+
+        <main class="settings-content">
+          <div class="settings-list" id="settings-list" aria-label="已选择币种"></div>
+          <button class="add-currency-button" id="add-currency-button" type="button">
+            <span aria-hidden="true">＋</span>
+            <span>添加币种</span>
+          </button>
+          <p class="settings-helper">同时显示 2–8 种货币 · 自动保存</p>
+        </main>
+      </section>
+
+      <p class="sr-only" id="live-announcer" aria-live="polite"></p>
+    </div>
+
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>
