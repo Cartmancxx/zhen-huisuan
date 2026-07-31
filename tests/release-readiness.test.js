@@ -30,11 +30,21 @@ test("includes the required open-source and release documentation", async () => 
     "PRIVACY_EN.md",
     "CONTRIBUTING.md",
     "PUBLISHING.md",
+    "STORE_SUBMISSION_GUIDE.md",
     "SECURITY.md",
     "CODE_OF_CONDUCT.md",
     "CHANGELOG.md",
     "store-listing/chrome-zh-CN.md",
+    "store-listing/chrome-zh-TW.md",
+    "store-listing/chrome-en.md",
+    "store-listing/chrome-vi.md",
     "store-listing/edge-zh-CN.md",
+    "store-listing/edge-zh-TW.md",
+    "store-listing/edge-en.md",
+    "store-listing/edge-vi.md",
+    "store-listing/YOUTUBE_UPLOAD.md",
+    "video/README.md",
+    "video/AUDIO-CREDITS.md",
     "social/小红书宣发稿.md"
   ]) {
     await assertNonEmpty(relativePath);
@@ -46,6 +56,15 @@ test("includes the required open-source and release documentation", async () => 
   assert.match(readme, /^# 真汇算/m);
   assert.match(readme, /assets\/sponsor-code\.jpg/);
   await assertNonEmpty("assets/sponsor-code.jpg");
+
+  for (const relativePath of [
+    "store-assets/video/zh-CN/zhen-huisuan-promo-zh.mp4",
+    "store-assets/video/en/zhen-huisuan-promo-en.mp4"
+  ]) {
+    const video = await readFile(join(projectDirectory, relativePath));
+    assert.ok(video.length > 1_000_000, `${relativePath} is unexpectedly small`);
+    assert.equal(video.subarray(4, 8).toString("ascii"), "ftyp");
+  }
 });
 
 test("store images use the required dimensions", async () => {
@@ -58,11 +77,53 @@ test("store images use the required dimensions", async () => {
     ["store-assets/edge/screenshot-main-1280x800.png", [1280, 800]],
     ["store-assets/edge/screenshot-settings-1280x800.png", [1280, 800]],
     ["store-assets/edge/promo-small-440x280.png", [440, 280]],
-    ["store-assets/edge/promo-large-1400x560.png", [1400, 560]]
+    ["store-assets/edge/promo-large-1400x560.png", [1400, 560]],
+    ["store-assets/video/zh-CN/youtube-thumbnail-1280x720.png", [1280, 720]],
+    ["store-assets/video/zh-TW/youtube-thumbnail-1280x720.png", [1280, 720]],
+    ["store-assets/video/en/youtube-thumbnail-1280x720.png", [1280, 720]],
+    ["store-assets/video/vi/youtube-thumbnail-1280x720.png", [1280, 720]]
   ]);
+
+  for (const store of ["chrome", "edge"]) {
+    for (const locale of ["zh-CN", "zh-TW", "en", "vi"]) {
+      expected.set(
+        `store-assets/${store}/${locale}/screenshot-01-any-input-1280x800.png`,
+        [1280, 800]
+      );
+      expected.set(
+        `store-assets/${store}/${locale}/promo-small-440x280.png`,
+        [440, 280]
+      );
+      expected.set(
+        `store-assets/${store}/${locale}/promo-large-1400x560.png`,
+        [1400, 560]
+      );
+    }
+
+    for (const locale of ["zh-CN", "en"]) {
+      expected.set(
+        `store-assets/${store}/${locale}/screenshot-02-settings-1280x800.png`,
+        [1280, 800]
+      );
+    }
+  }
 
   for (const [relativePath, [width, height]] of expected) {
     assert.deepEqual(await readPngDimensions(relativePath), { width, height });
+  }
+});
+
+test("store copy explains localized amount parsing without scientific notation claims", async () => {
+  for (const relativePath of [
+    "store-listing/chrome-zh-CN.md",
+    "store-listing/chrome-en.md",
+    "store-listing/edge-zh-CN.md",
+    "store-listing/edge-en.md"
+  ]) {
+    const content = await readFile(join(projectDirectory, relativePath), "utf8");
+    assert.match(content, /1,000/);
+    assert.match(content, /1000/);
+    assert.doesNotMatch(content, /科学计数法|scientific notation/i);
   }
 });
 

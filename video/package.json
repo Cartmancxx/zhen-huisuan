@@ -1,0 +1,22 @@
+{
+  "name": "zhen-huisuan-promo-video",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "remotion studio src/index.ts",
+    "render:zh": "remotion render src/index.ts ZhenHuiSuanZhBgm output/zhen-huisuan-promo-zh.mp4 --codec=h264 --crf=16",
+    "render:zh:no-bgm": "remotion render src/index.ts ZhenHuiSuanZhNoBgm output/zhen-huisuan-promo-zh-no-bgm.mp4 --codec=h264 --crf=16",
+    "render:en": "remotion render src/index.ts ZhenHuiSuanEnBgm output/zhen-huisuan-promo-en.mp4 --codec=h264 --crf=16",
+    "render:en:no-bgm": "remotion render src/index.ts ZhenHuiSuanEnNoBgm output/zhen-huisuan-promo-en-no-bgm.mp4 --codec=h264 --crf=16"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.484",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "remotion": "4.0.484"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.17",
+    "typescript": "^6.0.3"
+  }
+}
