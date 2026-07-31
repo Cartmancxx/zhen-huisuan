@@ -2,7 +2,7 @@
 
 本文供维护者发布真汇算的新版本。用户安装说明见 [README.md](README.md)。
 
-本项目当前仅通过 GitHub Releases 分发，不提交 Chrome Web Store 或 Microsoft Edge Add-ons。下方商店材料仅作为未来可选项保留。
+本项目同时准备 GitHub Releases、Chrome Web Store 和 Microsoft Edge Add-ons。完整商店上传流程见 [STORE_SUBMISSION_GUIDE.md](STORE_SUBMISSION_GUIDE.md)。
 
 ## 1. 发布前检查
 
@@ -15,7 +15,9 @@
    npm audit
    npm test
    npm run icons
+   npm run store-assets
    npm run normalize-assets
+   npm run package:store
    ```
 
 4. 在 Chrome 和 Edge 中加载已解压扩展，手动验证：
@@ -37,10 +39,10 @@ git push origin v2.1.0
 
 `.github/workflows/release.yml` 会重新运行测试，生成只包含扩展运行文件和必要说明的 ZIP，同时发布 SHA-256 校验文件。
 
-## 3. 可选：Chrome Web Store
+## 3. Chrome Web Store
 
-- 上传包：`release/真汇算-v2.1.0.zip`
-- 文案：`store-listing/chrome-zh-CN.md`
+- 上传包：`release/zhen-huisuan-v2.1.0-store.zip`
+- 文案：`store-listing/chrome-*.md`
 - 图标：扩展包中的 `icons/icon-128.png`
 - 截图：
   - `store-assets/chrome/screenshot-main-1280x800.png`
@@ -48,16 +50,18 @@ git push origin v2.1.0
 - 小型宣传图：`store-assets/chrome/promo-small-440x280.png`
 - Marquee：`store-assets/chrome/promo-marquee-1400x560.png`
 - 隐私政策：公开仓库中的 `PRIVACY.md`
+- 视频：先按 `store-listing/YOUTUBE_UPLOAD.md` 上传 YouTube，再粘贴 URL
 
 完成 Store Listing、Privacy、Distribution 和测试说明后，检查预览，再提交审核。
 
-## 4. 可选：Microsoft Edge Add-ons
+## 4. Microsoft Edge Add-ons
 
 - 上传与 Chrome 相同的扩展 ZIP
-- 文案：`store-listing/edge-zh-CN.md`
+- 文案：`store-listing/edge-*.md`
 - 商店 Logo：`store-assets/edge/logo-300x300.png`
 - 截图与宣传图：`store-assets/edge/`
 - 隐私政策：公开仓库中的 `PRIVACY.md`
+- 视频：使用同一组 YouTube URL，并关闭广告
 
 提交前确认所有地区语言的必填项已完成。
 

@@ -1,0 +1,529 @@
+{
+  "pageW": 390,
+  "deviceScaleFactor": 4,
+  "source": "video\\scripts\\capture.mjs",
+  "captures": {
+    "zh-cn-cny": {
+      "locale": "zh-CN",
+      "sourceCode": "CNY",
+      "raw": "1,000",
+      "pageH": 600,
+      "converter": {
+        "x": 0,
+        "y": 0,
+        "w": 390,
+        "h": 486
+      },
+      "rows": {
+        "CNY": {
+          "x": 0,
+          "y": 68,
+          "w": 390,
+          "h": 88
+        },
+        "HKD": {
+          "x": 0,
+          "y": 156,
+          "w": 390,
+          "h": 88
+        },
+        "USD": {
+          "x": 0,
+          "y": 244,
+          "w": 390,
+          "h": 88
+        },
+        "VND": {
+          "x": 0,
+          "y": 332,
+          "w": 390,
+          "h": 88
+        }
+      },
+      "inputs": {
+        "CNY": {
+          "x": 128,
+          "y": 87.5,
+          "w": 242,
+          "h": 48
+        },
+        "HKD": {
+          "x": 128,
+          "y": 175.5,
+          "w": 242,
+          "h": 48
+        },
+        "USD": {
+          "x": 128,
+          "y": 263.5,
+          "w": 242,
+          "h": 48
+        },
+        "VND": {
+          "x": 128,
+          "y": 351.5,
+          "w": 242,
+          "h": 48
+        }
+      },
+      "files": {
+        "main": "zh-cn-cny-main.png",
+        "empty": "zh-cn-cny-empty.png",
+        "typing": [
+          "zh-cn-cny-typing-blank.png",
+          "zh-cn-cny-typing-1.png",
+          "zh-cn-cny-typing-10.png",
+          "zh-cn-cny-typing-100.png",
+          "zh-cn-cny-typing-1000.png"
+        ]
+      },
+      "errors": []
+    },
+    "zh-cn-settings": {
+      "locale": "zh-CN",
+      "pageH": 600,
+      "settings": {
+        "x": 0,
+        "y": 0,
+        "w": 390,
+        "h": 580
+      },
+      "settingRows": [
+        {
+          "x": 0,
+          "y": 68,
+          "w": 390,
+          "h": 76
+        },
+        {
+          "x": 0,
+          "y": 144,
+          "w": 390,
+          "h": 76
+        },
+        {
+          "x": 0,
+          "y": 220,
+          "w": 390,
+          "h": 76
+        },
+        {
+          "x": 0,
+          "y": 296,
+          "w": 390,
+          "h": 76
+        }
+      ],
+      "sponsorCard": {
+        "x": 20,
+        "y": 486.8,
+        "w": 350,
+        "h": 94
+      },
+      "files": {
+        "settings": "zh-cn-settings.png"
+      },
+      "errors": []
+    },
+    "zh-cn-vnd": {
+      "locale": "zh-CN",
+      "sourceCode": "VND",
+      "raw": "26.252.670",
+      "pageH": 600,
+      "converter": {
+        "x": 0,
+        "y": 0,
+        "w": 390,
+        "h": 486
+      },
+      "rows": {
+        "CNY": {
+          "x": 0,
+          "y": 68,
+          "w": 390,
+          "h": 88
+        },
+        "HKD": {
+          "x": 0,
+          "y": 156,
+          "w": 390,
+          "h": 88
+        },
+        "USD": {
+          "x": 0,
+          "y": 244,
+          "w": 390,
+          "h": 88
+        },
+        "VND": {
+          "x": 0,
+          "y": 332,
+          "w": 390,
+          "h": 88
+        }
+      },
+      "inputs": {
+        "CNY": {
+          "x": 128,
+          "y": 87.5,
+          "w": 242,
+          "h": 48
+        },
+        "HKD": {
+          "x": 128,
+          "y": 175.5,
+          "w": 242,
+          "h": 48
+        },
+        "USD": {
+          "x": 128,
+          "y": 263.5,
+          "w": 242,
+          "h": 48
+        },
+        "VND": {
+          "x": 128,
+          "y": 351.5,
+          "w": 242,
+          "h": 48
+        }
+      },
+      "files": {
+        "main": "zh-cn-vnd-main.png",
+        "empty": "zh-cn-vnd-empty.png",
+        "blank": "zh-cn-vnd-blank.png"
+      },
+      "errors": []
+    },
+    "en-cny": {
+      "locale": "en",
+      "sourceCode": "CNY",
+      "raw": "1,000",
+      "pageH": 600,
+      "converter": {
+        "x": 0,
+        "y": 0,
+        "w": 390,
+        "h": 486
+      },
+      "rows": {
+        "CNY": {
+          "x": 0,
+          "y": 68,
+          "w": 390,
+          "h": 88
+        },
+        "HKD": {
+          "x": 0,
+          "y": 156,
+          "w": 390,
+          "h": 88
+        },
+        "USD": {
+          "x": 0,
+          "y": 244,
+          "w": 390,
+          "h": 88
+        },
+        "VND": {
+          "x": 0,
+          "y": 332,
+          "w": 390,
+          "h": 88
+        }
+      },
+      "inputs": {
+        "CNY": {
+          "x": 152,
+          "y": 87.5,
+          "w": 218,
+          "h": 48
+        },
+        "HKD": {
+          "x": 152,
+          "y": 175.5,
+          "w": 218,
+          "h": 48
+        },
+        "USD": {
+          "x": 152,
+          "y": 263.5,
+          "w": 218,
+          "h": 48
+        },
+        "VND": {
+          "x": 152,
+          "y": 351.5,
+          "w": 218,
+          "h": 48
+        }
+      },
+      "files": {
+        "main": "en-cny-main.png",
+        "empty": "en-cny-empty.png",
+        "typing": [
+          "en-cny-typing-blank.png",
+          "en-cny-typing-1.png",
+          "en-cny-typing-10.png",
+          "en-cny-typing-100.png",
+          "en-cny-typing-1000.png"
+        ]
+      },
+      "errors": []
+    },
+    "en-settings": {
+      "locale": "en",
+      "pageH": 600,
+      "settings": {
+        "x": 0,
+        "y": 0,
+        "w": 390,
+        "h": 580
+      },
+      "settingRows": [
+        {
+          "x": 0,
+          "y": 68,
+          "w": 390,
+          "h": 76
+        },
+        {
+          "x": 0,
+          "y": 144,
+          "w": 390,
+          "h": 76
+        },
+        {
+          "x": 0,
+          "y": 220,
+          "w": 390,
+          "h": 76
+        },
+        {
+          "x": 0,
+          "y": 296,
+          "w": 390,
+          "h": 76
+        }
+      ],
+      "sponsorCard": {
+        "x": 20,
+        "y": 486.8,
+        "w": 350,
+        "h": 94
+      },
+      "files": {
+        "settings": "en-settings.png"
+      },
+      "errors": []
+    },
+    "en-vnd": {
+      "locale": "en",
+      "sourceCode": "VND",
+      "raw": "26.252.670",
+      "pageH": 600,
+      "converter": {
+        "x": 0,
+        "y": 0,
+        "w": 390,
+        "h": 486
+      },
+      "rows": {
+        "CNY": {
+          "x": 0,
+          "y": 68,
+          "w": 390,
+          "h": 88
+        },
+        "HKD": {
+          "x": 0,
+          "y": 156,
+          "w": 390,
+          "h": 88
+        },
+        "USD": {
+          "x": 0,
+          "y": 244,
+          "w": 390,
+          "h": 88
+        },
+        "VND": {
+          "x": 0,
+          "y": 332,
+          "w": 390,
+          "h": 88
+        }
+      },
+      "inputs": {
+        "CNY": {
+          "x": 152,
+          "y": 87.5,
+          "w": 218,
+          "h": 48
+        },
+        "HKD": {
+          "x": 152,
+          "y": 175.5,
+          "w": 218,
+          "h": 48
+        },
+        "USD": {
+          "x": 152,
+          "y": 263.5,
+          "w": 218,
+          "h": 48
+        },
+        "VND": {
+          "x": 152,
+          "y": 351.5,
+          "w": 218,
+          "h": 48
+        }
+      },
+      "files": {
+        "main": "en-vnd-main.png",
+        "empty": "en-vnd-empty.png",
+        "blank": "en-vnd-blank.png"
+      },
+      "errors": []
+    },
+    "vi-cny": {
+      "locale": "vi",
+      "sourceCode": "CNY",
+      "raw": "1.000",
+      "pageH": 600,
+      "converter": {
+        "x": 0,
+        "y": 0,
+        "w": 390,
+        "h": 486
+      },
+      "rows": {
+        "CNY": {
+          "x": 0,
+          "y": 68,
+          "w": 390,
+          "h": 88
+        },
+        "HKD": {
+          "x": 0,
+          "y": 156,
+          "w": 390,
+          "h": 88
+        },
+        "USD": {
+          "x": 0,
+          "y": 244,
+          "w": 390,
+          "h": 88
+        },
+        "VND": {
+          "x": 0,
+          "y": 332,
+          "w": 390,
+          "h": 88
+        }
+      },
+      "inputs": {
+        "CNY": {
+          "x": 152,
+          "y": 87.5,
+          "w": 218,
+          "h": 48
+        },
+        "HKD": {
+          "x": 152,
+          "y": 175.5,
+          "w": 218,
+          "h": 48
+        },
+        "USD": {
+          "x": 152,
+          "y": 263.5,
+          "w": 218,
+          "h": 48
+        },
+        "VND": {
+          "x": 152,
+          "y": 351.5,
+          "w": 218,
+          "h": 48
+        }
+      },
+      "files": {
+        "main": "vi-cny-main.png",
+        "empty": "vi-cny-empty.png"
+      },
+      "errors": []
+    },
+    "zh-tw-cny": {
+      "locale": "zh-TW",
+      "sourceCode": "CNY",
+      "raw": "1,000",
+      "pageH": 600,
+      "converter": {
+        "x": 0,
+        "y": 0,
+        "w": 390,
+        "h": 486
+      },
+      "rows": {
+        "CNY": {
+          "x": 0,
+          "y": 68,
+          "w": 390,
+          "h": 88
+        },
+        "HKD": {
+          "x": 0,
+          "y": 156,
+          "w": 390,
+          "h": 88
+        },
+        "USD": {
+          "x": 0,
+          "y": 244,
+          "w": 390,
+          "h": 88
+        },
+        "VND": {
+          "x": 0,
+          "y": 332,
+          "w": 390,
+          "h": 88
+        }
+      },
+      "inputs": {
+        "CNY": {
+          "x": 128,
+          "y": 87.5,
+          "w": 242,
+          "h": 48
+        },
+        "HKD": {
+          "x": 128,
+          "y": 175.5,
+          "w": 242,
+          "h": 48
+        },
+        "USD": {
+          "x": 128,
+          "y": 263.5,
+          "w": 242,
+          "h": 48
+        },
+        "VND": {
+          "x": 128,
+          "y": 351.5,
+          "w": 242,
+          "h": 48
+        }
+      },
+      "files": {
+        "main": "zh-tw-cny-main.png",
+        "empty": "zh-tw-cny-empty.png"
+      },
+      "errors": []
+    }
+  }
+}

@@ -6,9 +6,11 @@ A minimal, open-source multi-currency converter for Chrome and Edge.
 
 There is no “from” or “to” selector. Enter an amount in any currency field and every other field updates immediately. You can show 2–8 currencies and freely add, remove, or replace them.
 
-> The extension is distributed through GitHub only. Download the ZIP from Releases, extract it, and load the folder in your browser's developer mode.
+> Zhen Hui Suan is now live on the Chrome Web Store. The Microsoft Edge Add-ons package, four localized listings, and promotional assets are also ready; GitHub Releases remains available while the Edge listing is under review.
 
-![Zhen Hui Suan main view](design/zhenhuisuan-main-render.png)
+[Install from the Chrome Web Store](https://chromewebstore.google.com/detail/zhen-hui-suan/lbhpoliodgeipgbpbjlhfcniiipcpndj) · [Watch the promo on YouTube](https://www.youtube.com/watch?v=aU-nN0AAS9w)
+
+![Zhen Hui Suan: any-field input and thousands-separator parsing](store-assets/chrome/en/screenshot-01-any-input-1280x800.png)
 
 ## Features
 
@@ -41,6 +43,14 @@ Unsupported languages fall back to English. Currency names, number formatting, s
 
 ## Install
 
+### Chrome Web Store
+
+[Install Zhen Hui Suan from the Chrome Web Store](https://chromewebstore.google.com/detail/zhen-hui-suan/lbhpoliodgeipgbpbjlhfcniiipcpndj). Store installations update automatically.
+
+### Microsoft Edge Add-ons
+
+The Edge listing package is ready. Its public store link will be added after approval.
+
 ### From a Release
 
 1. Download the latest ZIP from [Releases](https://github.com/Cartmancxx/zhen-huisuan/releases).
@@ -62,7 +72,7 @@ Clone or download this repository, then load the repository root with **Load unp
 3. Open the gear menu to add, remove, or replace currencies.
 4. Press `Esc` to clear values and `↑` / `↓` to move between fields.
 
-![Zhen Hui Suan currency settings](design/zhenhuisuan-settings-render.png)
+![Zhen Hui Suan currency settings and optional sponsorship](store-assets/chrome/en/screenshot-02-settings-1280x800.png)
 
 ## Exchange-rate source
 
@@ -104,6 +114,16 @@ Open `http://127.0.0.1:8765/popup.html?lang=en` to preview the English interface
 ## Contributing
 
 Issues and pull requests are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+
+## Promotional video
+
+The video demonstrates real any-field input, `1,000` parsing, linked four-currency conversion, automatic language, and optional sponsorship. See [video/README.md](video/README.md) for the reproducible Remotion project.
+
+Store upload steps, asset paths, and privacy answers are documented in [STORE_SUBMISSION_GUIDE.md](STORE_SUBMISSION_GUIDE.md).
+
+[![Watch the Zhen Hui Suan promo on YouTube](store-assets/video/en/youtube-thumbnail-1280x720.png)](https://www.youtube.com/watch?v=aU-nN0AAS9w)
+
+[Download the Chinese MP4](store-assets/video/zh-CN/zhen-huisuan-promo-zh.mp4) · [Download the English MP4](store-assets/video/en/zhen-huisuan-promo-en.mp4)
 
 ## License
 

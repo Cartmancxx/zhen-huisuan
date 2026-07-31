@@ -6,9 +6,11 @@
 
 无需先选择“从哪种货币换到哪种货币”：直接在任意货币框中输入数字，其他货币会立即联动换算。币种和数量都可自由调整，同时显示 2–8 种货币。
 
-> 当前仅通过 GitHub 开源分发，不在 Chrome / Edge 扩展市场上架。请从 Releases 下载 ZIP，解压后使用浏览器“开发者模式”加载。
+> Chrome Web Store 已正式上线；Microsoft Edge Add-ons 的上架包、四语商品页和宣传素材也已准备完成。Edge 审核通过前仍可从 GitHub Releases 手动安装。
 
-![真汇算主界面](design/zhenhuisuan-main-render.png)
+[Chrome Web Store 安装](https://chromewebstore.google.com/detail/zhen-hui-suan/lbhpoliodgeipgbpbjlhfcniiipcpndj) · [在 YouTube 观看宣传片](https://www.youtube.com/watch?v=aU-nN0AAS9w)
+
+![真汇算：任意币种输入并识别千分符](store-assets/chrome/zh-CN/screenshot-01-any-input-1280x800.png)
 
 ## 特点
 
@@ -41,6 +43,14 @@
 
 ## 安装
 
+### Chrome Web Store
+
+[从 Chrome Web Store 安装真汇算](https://chromewebstore.google.com/detail/zhen-hui-suan/lbhpoliodgeipgbpbjlhfcniiipcpndj)。商店版可以自动更新。
+
+### Microsoft Edge Add-ons
+
+Edge 商店资料已准备完成，正式商品页链接会在审核通过后补充。
+
 ### 从源码安装
 
 1. 下载本仓库并解压。
@@ -66,7 +76,7 @@
 3. 点击右上角齿轮，可替换、增加或删除币种。
 4. 按 `Esc` 清空；按 `↑` / `↓` 快速切换输入框。
 
-![真汇算币种设置](design/zhenhuisuan-settings-render.png)
+![真汇算币种设置与自愿赞助入口](store-assets/chrome/zh-CN/screenshot-02-settings-1280x800.png)
 
 ## 汇率来源
 
@@ -116,6 +126,15 @@ npm run serve
 欢迎提交 Issue 和 Pull Request。开始前请阅读 [CONTRIBUTING.md](CONTRIBUTING.md) 与 [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)。
 
 维护者发布新版本时请参照 [PUBLISHING.md](PUBLISHING.md)。
+商店上传步骤、素材路径和隐私申报见 [STORE_SUBMISSION_GUIDE.md](STORE_SUBMISSION_GUIDE.md)。
+
+## 宣传视频
+
+宣传片真实演示任意币种输入、`1,000` 千分符识别、四币种联动、自动语言和自愿赞助入口。视频工程与可重复渲染说明见 [video/README.md](video/README.md)。
+
+[![在 YouTube 观看真汇算宣传视频](store-assets/video/zh-CN/youtube-thumbnail-1280x720.png)](https://www.youtube.com/watch?v=aU-nN0AAS9w)
+
+[下载仓库内中文 MP4](store-assets/video/zh-CN/zhen-huisuan-promo-zh.mp4) · [下载仓库内英文 MP4](store-assets/video/en/zhen-huisuan-promo-en.mp4)
 
 ## 许可证
 
